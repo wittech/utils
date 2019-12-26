@@ -1,20 +1,25 @@
-<h1 align="center">@pansy/is-nan</h1>
+<h1 align="center">@pansy/arabic-chinese</h1>
 
-> 判断当前值是否为`NaN`
+> 阿拉伯数字和中文数字互转
 
 ## 📦 安装
 
 ```
 // npm
-npm install @pansy/is-nan --save
+npm install @pansy/arabic-chinese --save
 
 // yarn
-yarn add @pansy/is-nan
+yarn add @pansy/arabic-chinese
 
 ```
 
 ## 🔨 使用
 
 ```
-import isNaN from '@pansy/is-nan';
+import ArabicChinese from '@pansy/arabic-chinese';
+
+const ac = new ArabicChinese();
+
+ac.encode(1);
+// >> 一
 ```
