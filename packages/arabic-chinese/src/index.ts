@@ -1,9 +1,9 @@
 import isString from '@pansy/is-string';
 import cns from './langs/cn-s';
 import hks from './langs/hk-s';
+import toMoney from './to-money';
 import numberToChinese from './number-to-chinese';
 import chineseToNumber from './chinese-to-number';
-import toMoney from './to-money';
 import { Options } from './types';
 
 export const defaultOptions: Options = {
@@ -49,10 +49,9 @@ export default class ArabicChinese {
    * @param num
    * @param options
    */
-  encode = (num: string | number, options?: Options): string => {
-    const _options = Object.assign({}, this.options, options);
-    const lang = _options.lang === 'cn' ? cns : hks;
-    return numberToChinese(num, lang, _options);
+  encode = (num: string | number): string => {
+    const lang = this.options.lang === 'cn' ? cns : hks;
+    return numberToChinese(num, lang, this.options);
   };
 
   /**
@@ -60,10 +59,9 @@ export default class ArabicChinese {
    * @param zhNum
    * @param options
    */
-  decode = (zhNum: string, options?: Options): number => {
+  decode = (zhNum: string): number => {
     if (!isString(zhNum)) return zhNum;
-    const _options = Object.assign({}, this.options, options);
-    const lang = _options.lang === 'cn' ? cns : hks;
+    const lang = this.options.lang === 'cn' ? cns : hks;
     return chineseToNumber(zhNum, lang);
   };
 
@@ -72,9 +70,8 @@ export default class ArabicChinese {
    * @param num
    * @param options
    */
-  toMoney = (num: string | number, options?: Options): string => {
+  toMoney = (num: string | number): string => {
     if (!num) return num.toString();
-    const _options = Object.assign({}, this.options, options);
-    return toMoney(num, _options);
+    return toMoney(num, this.options);
   };
 }
