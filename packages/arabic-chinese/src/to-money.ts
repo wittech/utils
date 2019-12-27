@@ -1,6 +1,6 @@
 import { getNumberResult, clearZero } from './utils';
 import numberToChinese from './number-to-chinese';
-import { defaultOptions } from './config';
+import { defaultOptions } from './index';
 import cnb from './langs/cn-b';
 import hkb from './langs/hk-b';
 import { Options } from './types';

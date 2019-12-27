@@ -1,11 +1,18 @@
 import isString from '@pansy/is-string';
-import { defaultOptions } from './config';
 import cns from './langs/cn-s';
 import hks from './langs/hk-s';
 import numberToChinese from './number-to-chinese';
 import chineseToNumber from './chinese-to-number';
 import toMoney from './to-money';
 import { Options } from './types';
+
+export const defaultOptions: Options = {
+  ww: true,
+  lang: 'cn',
+  tenMin: false,
+  complete: false,
+  outSymbol: true
+};
 
 /**
  * 阿拉伯数字和中文数字互转

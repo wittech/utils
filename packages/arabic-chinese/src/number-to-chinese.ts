@@ -1,6 +1,6 @@
 import { getNumberResult, encodeInteger, clearZero } from './utils';
 import { Lang, Options } from './types';
-import { defaultOptions } from './config';
+import { defaultOptions } from './index';
 
 /**
  * @ignore
