@@ -1,9 +1,6 @@
+import { Options, Lang } from './types';
 import { getNumberResult, clearZero } from './utils';
 import numberToChinese from './number-to-chinese';
-import { defaultOptions } from './index';
-import cnb from './langs/cn-b';
-import hkb from './langs/hk-b';
-import { Options } from './types';
 
 /**
  * @ignore
@@ -11,15 +8,12 @@ import { Options } from './types';
  * @param num
  * @param options
  */
-export default function toMoney(num: string | number, options?: Options): string {
+export default function toMoney(num: string | number, lang: Lang, options: Options): string {
   const result = getNumberResult(num);
   if (!result) {
     return num + '';
   }
-  options = Object.assign(defaultOptions, options);
 
-  // 获取语言配置
-  const lang = options.lang === 'cn' ? cnb : hkb;
   // 零字符文本
   const zero = lang.digits.charAt(0);
 
@@ -30,7 +24,7 @@ export default function toMoney(num: string | number, options?: Options): string
     integerStr = _decimal ? '' : lang.complete,
     decimalStr = '';
 
-  function getChinese(num) {
+  function getChinese(num: string) {
     return numberToChinese(num, lang, options);
   }
 

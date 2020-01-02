@@ -1,5 +1,5 @@
-import { unshiftZero, getDigit, centerArray } from './utils';
 import { Lang } from './types';
+import { unshiftZero, getDigit, centerArray } from './utils';
 
 /**
  * @ignore
@@ -8,23 +8,26 @@ import { Lang } from './types';
  * @param lang
  */
 export default function chineseToNumber(zhNum: string, lang: Lang): number {
-  const result = zhNum.split(lang.point);
+  const result: string[] = zhNum.split(lang.point);
 
-  let _integer = result[0].replace(lang.minus, ''),
-    _decimal = result[1],
-    _minus = !!~result[0].indexOf(lang.minus);
+  // 整数部分
+  let _integer: string = result[0].replace(lang.minus, ''),
+    // 小数部分
+    _decimal: string = result[1],
+    // 是否是负数
+    _minus: boolean = !!~result[0].indexOf(lang.minus);
 
-  let unitCharS = lang.unitChars.charAt(1), // 十
-    unitCharW = lang.unitChars.charAt(4), // 万
-    unitCharY = lang.unitChars.charAt(5); // 亿
+  let unitCharS: string = lang.unitChars.charAt(1), // 十
+    unitCharW: string = lang.unitChars.charAt(4), // 万
+    unitCharY: string = lang.unitChars.charAt(5); // 亿
 
   // 万万 ==> 亿
   _integer = _integer.replace(new RegExp(unitCharW + '{2}', 'g'), unitCharY);
 
-  const chars = _integer.split('');
+  const chars: string[] = _integer.split('');
 
-  let unitChar = 0,
-    maxUnitChar = 0;
+  let unitChar: number = 0,
+    maxUnitChar: number = 0;
   let rnum_a: number[] = [],
     num_a: number[] = [],
     _num_a: number[] = [];

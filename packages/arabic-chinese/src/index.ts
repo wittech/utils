@@ -1,10 +1,12 @@
 import isString from '@pansy/is-string';
 import cns from './langs/cn-s';
 import hks from './langs/hk-s';
+import cnb from './langs/cn-b';
+import hkb from './langs/hk-b';
 import toMoney from './to-money';
 import numberToChinese from './number-to-chinese';
 import chineseToNumber from './chinese-to-number';
-import { Options } from './types';
+import { Options, Lang } from './types';
 
 export const defaultOptions: Options = {
   ww: true,
@@ -39,9 +41,13 @@ export const defaultOptions: Options = {
  */
 export default class ArabicChinese {
   private readonly options: Options;
+  private readonly langS: Lang;
+  private readonly langB: Lang;
 
   constructor(options?: Options) {
     this.options = Object.assign({}, defaultOptions, options);
+    this.langS = this.options.lang === 'cn' ? cns : hks;
+    this.langB = this.options.lang === 'cn' ? cnb : hkb;
   }
 
   /**
@@ -50,8 +56,7 @@ export default class ArabicChinese {
    * @param options
    */
   encode = (num: string | number): string => {
-    const lang = this.options.lang === 'cn' ? cns : hks;
-    return numberToChinese(num, lang, this.options);
+    return numberToChinese(num, this.langS, this.options);
   };
 
   /**
@@ -61,8 +66,7 @@ export default class ArabicChinese {
    */
   decode = (zhNum: string): number => {
     if (!isString(zhNum)) return zhNum;
-    const lang = this.options.lang === 'cn' ? cns : hks;
-    return chineseToNumber(zhNum, lang);
+    return chineseToNumber(zhNum, this.langS);
   };
 
   /**
@@ -72,6 +76,6 @@ export default class ArabicChinese {
    */
   toMoney = (num: string | number): string => {
     if (!num) return num.toString();
-    return toMoney(num, this.options);
+    return toMoney(num, this.langB, this.options);
   };
 }

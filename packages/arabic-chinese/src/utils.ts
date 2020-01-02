@@ -128,11 +128,15 @@ export function unshiftZero(arr: number[], num: number = 1) {
 }
 
 /**
- * @ignore
- * 清除字符串中多余的零
+ * 清除字符串中多余的零 默认处理结尾+多个连续
  * @param str 需要处理的字符串
  * @param zero 零字符
  * @param type ^ - 开头, $ - 结尾, nto1 - 多个连续变一个
+ * @example
+ * ```
+ * clearZero('零零一', '零')
+ * >> 一
+ * ```
  */
 export function clearZero(str: string, zero: string, type?: '^' | '$' | 'nto1'): string {
   if (!str) return '';
@@ -143,15 +147,15 @@ export function clearZero(str: string, zero: string, type?: '^' | '$' | 'nto1'):
     arg_e = new RegExp(reg0 + '+$'),
     arg_d = new RegExp(reg0 + '{2}', 'g');
 
-  if (type == '^') {
+  if (type === '^') {
     str = str.replace(arg_s, '');
   }
 
-  if (!type || type == '$') {
+  if (!type || type === '$') {
     str = str.replace(arg_e, '');
   }
 
-  if (!type || type == 'nto1') {
+  if (!type || type === 'nto1') {
     str = str.replace(arg_d, '');
   }
 
